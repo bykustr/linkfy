@@ -102,7 +102,7 @@ async function loadData() {
 // Load links
 async function loadLinks() {
     try {
-        const response = await fetch('/api/links.php', {
+        const response = await fetch('/api/link.php', {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -238,7 +238,7 @@ async function createLink(e) {
     const originalUrl = document.getElementById('originalUrl').value;
     
     try {
-        const response = await fetch('/api/links.php', {
+        const response = await fetch('/api/link.php', {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -268,7 +268,7 @@ async function deleteLink(id) {
     if (!confirm('Bu linki silmek istediğinizden emin misiniz?')) return;
     
     try {
-        const response = await fetch(`/api/links.php?id=${id}`, {
+        const response = await fetch(`/api/link.php?id=${id}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${token}`
