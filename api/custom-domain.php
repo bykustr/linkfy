@@ -16,10 +16,10 @@ $db = Database::getInstance()->getConnection();
 $method = $_SERVER['REQUEST_METHOD'];
 $input = json_decode(file_get_contents('php://input'), true);
 
-// GET    /api/custom_domains.php - Kullanıcının domainlerini listele
-// POST   /api/custom_domains.php - Yeni domain ekle
-// POST   /api/custom_domains.php?action=verify - Domain'i doğrula
-// DELETE /api/custom_domains.php?id=123 - Domain'i sil
+// GET    /api/custom-domain.php - Kullanıcının domainlerini listele
+// POST   /api/custom-domain.php - Yeni domain ekle
+// POST   /api/custom-domain.php?action=verify - Domain'i doğrula
+// DELETE /api/custom-domain.php?id=123 - Domain'i sil
 
 $action = isset($_GET['action']) ? $_GET['action'] : '';
 
