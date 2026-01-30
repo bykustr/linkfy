@@ -12,9 +12,9 @@ $db = Database::getInstance()->getConnection();
 $method = $_SERVER['REQUEST_METHOD'];
 $input = json_decode(file_get_contents('php://input'), true);
 
-// GET    /api/links.php - Kullanıcının tüm linklerini getir
-// POST   /api/links.php - Yeni link oluştur
-// DELETE /api/links.php?id=123 - Link sil
+// GET    /api/link.php - Kullanıcının tüm linklerini getir
+// POST   /api/link.php - Yeni link oluştur
+// DELETE /api/link.php?id=123 - Link sil
 
 switch ($method) {
     case 'GET':
