@@ -12,9 +12,9 @@ $db = Database::getInstance()->getConnection();
 $method = $_SERVER['REQUEST_METHOD'];
 $input = json_decode(file_get_contents('php://input'), true);
 
-// POST /api/password_reset.php?action=request - Şifre sıfırlama talebi
-// POST /api/password_reset.php?action=verify  - Token doğrulama
-// POST /api/password_reset.php?action=reset   - Yeni şifre ayarlama
+// POST /api/password-reset.php?action=request - Şifre sıfırlama talebi
+// POST /api/password-reset.php?action=verify  - Token doğrulama
+// POST /api/password-reset.php?action=reset   - Yeni şifre ayarlama
 
 $action = isset($_GET['action']) ? $_GET['action'] : '';
 
