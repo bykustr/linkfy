@@ -24,8 +24,8 @@ RewriteRule ^ - [L]
 # Bio Sayfaları: @kullaniciadi
 RewriteRule ^@([a-zA-Z0-9_]+)$ bio.php?username=$1 [L,QSA]
 
-# Kısa Linkler: /abc123 (6 karakter)
-RewriteRule ^([a-zA-Z0-9]{6})$ r.php?code=$1 [L,QSA]
+# Kısa Linkler: /abc123 (SHORT_CODE_LENGTH karakterinde tanımlı uzunlukta)
+RewriteRule ^([a-zA-Z0-9_-]{3,20})$ r.php?code=$1 [L,QSA]
 
 # Dashboard ve diğer sayfalar
 RewriteCond %{REQUEST_FILENAME} !-f
