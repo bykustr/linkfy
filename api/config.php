@@ -39,7 +39,14 @@ define('SHORT_CODE_LENGTH', 6);
 error_reporting(E_ALL);
 ini_set('display_errors', 0); // Production'da 0 yapın
 ini_set('log_errors', 1);
-ini_set('error_log', __DIR__ . '/../logs/php-error.log');
+// Log dizini yoksa PHP'nin varsayılan log konumunu kullan
+$logDir = __DIR__ . '/../logs';
+if (!is_dir($logDir)) {
+    @mkdir($logDir, 0755, true);
+}
+if (is_dir($logDir) && is_writable($logDir)) {
+    ini_set('error_log', $logDir . '/php-error.log');
+}
 
 // Timezone
 date_default_timezone_set('Europe/Istanbul');
