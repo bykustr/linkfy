@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linkfy - URL Kısaltma & Link Bio Platformu</title>
+    <meta name="description" content="Linklerinizi kısaltın, QR kod oluşturun ve kişisel bio sayfanızı oluşturun. Bit.ly ve Linktree'nin gücünü tek platformda birleştirin.">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Linkfy - URL Kısaltma & Link Bio Platformu">
+    <meta property="og:description" content="Linklerinizi kısaltın, QR kod oluşturun ve kişisel bio sayfanızı oluşturun.">
+    <meta property="og:type" content="website">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white shadow-md z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="/" class="flex items-center space-x-2">
+                        <i data-lucide="link-2" class="w-8 h-8 text-indigo-600"></i>
+                        <span class="text-2xl font-bold text-indigo-600">Linkfy</span>
+                    </a>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#features" class="text-gray-700 hover:text-indigo-600 transition">Özellikler</a>
+                    <a href="#pricing" class="text-gray-700 hover:text-indigo-600 transition">Fiyatlandırma</a>
+                    <a href="#" id="langToggle" class="flex items-center space-x-1 text-gray-700 hover:text-indigo-600 transition">
+                        <i data-lucide="globe" class="w-4 h-4"></i>
+                        <span>EN</span>
+                    </a>
+                    <a href="login.html" class="text-gray-700 hover:text-indigo-600 transition">Giriş Yap</a>
+                    <a href="register.html" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition">
+                        Kayıt Ol
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobileMenuBtn" class="md:hidden">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-t">
+            <div class="px-4 py-4 space-y-3">
+                <a href="#features" class="block text-gray-700 hover:text-indigo-600">Özellikler</a>
+                <a href="#pricing" class="block text-gray-700 hover:text-indigo-600">Fiyatlandırma</a>
+                <a href="login.html" class="block text-gray-700 hover:text-indigo-600">Giriş Yap</a>
+                <a href="register.html" class="block bg-indigo-600 text-white px-4 py-2 rounded-lg text-center">
+                    Kayıt Ol
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-4">
+        <div class="max-w-7xl mx-auto text-center fade-in">
+            <h1 class="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+                Linklerinizi Kısaltın,<br>Bio Sayfanızı Oluşturun
+            </h1>
+            <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+                Bit.ly ve Linktree'nin gücünü tek platformda birleştirin. QR kod, vCard ve daha fazlası!
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="register.html" class="bg-indigo-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-indigo-700 transform hover:scale-105 transition">
+                    Hemen Başla
+                </a>
+                <a href="#features" class="border-2 border-indigo-600 text-indigo-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-indigo-50 transform hover:scale-105 transition">
+                    Daha Fazla Bilgi
+                </a>
+            </div>
+
+            <!-- Demo Preview -->
+            <div class="mt-16 max-w-4xl mx-auto">
+                <div class="bg-white rounded-2xl shadow-2xl p-8">
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="text-left">
+                            <h3 class="text-2xl font-bold mb-4">URL Kısaltma</h3>
+                            <div class="space-y-3">
+                                <div class="p-4 bg-gray-50 rounded-lg">
+                                    <p class="text-sm text-gray-500 mb-1">Orijinal URL:</p>
+                                    <p class="text-gray-700 truncate">https://example.com/very-long-url...</p>
+                                </div>
+                                <div class="flex items-center justify-center">
+                                    <i data-lucide="arrow-down" class="w-6 h-6 text-indigo-600"></i>
+                                </div>
+                                <div class="p-4 bg-indigo-50 rounded-lg">
+                                    <p class="text-sm text-indigo-600 mb-1">Kısa Link:</p>
+                                    <p class="text-indigo-700 font-semibold">linkfy.tr/abc123</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-left">
+                            <h3 class="text-2xl font-bold mb-4">Bio Sayfası</h3>
+                            <div class="bg-gradient-to-br from-purple-400 to-pink-400 rounded-lg p-6 text-white">
+                                <div class="w-16 h-16 bg-white rounded-full mx-auto mb-3"></div>
+                                <h4 class="font-bold text-center mb-2">@kullaniciadi</h4>
+                                <div class="space-y-2">
+                                    <div class="bg-white bg-opacity-20 rounded-lg p-3 text-center text-sm">Link 1</div>
+                                    <div class="bg-white bg-opacity-20 rounded-lg p-3 text-center text-sm">Link 2</div>
+                                    <div class="bg-white bg-opacity-20 rounded-lg p-3 text-center text-sm">Link 3</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-16">Güçlü Özellikler</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="p-6 border border-gray-200 rounded-xl hover:shadow-lg transition fade-in">
+                    <div class="text-indigo-600 mb-4">
+                        <i data-lucide="link" class="w-12 h-12"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">URL Kısaltma</h3>
+                    <p class="text-gray-600">Uzun linkleri kısa ve paylaşılabilir hale getirin. Tıklama istatistiklerini takip edin.</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="p-6 border border-gray-200 rounded-xl hover:shadow-lg transition fade-in">
+                    <div class="text-indigo-600 mb-4">
+                        <i data-lucide="user" class="w-12 h-12"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Link Bio Sayfaları</h3>
+                    <p class="text-gray-600">Tüm linklerinizi tek bir sayfada toplayın. Sosyal medya için mükemmel!</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="p-6 border border-gray-200 rounded-xl hover:shadow-lg transition fade-in">
+                    <div class="text-indigo-600 mb-4">
+                        <i data-lucide="qr-code" class="w-12 h-12"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">QR Kodlar</h3>
+                    <p class="text-gray-600">Her link için otomatik QR kod oluşturun ve indirin.</p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="p-6 border border-gray-200 rounded-xl hover:shadow-lg transition fade-in">
+                    <div class="text-indigo-600 mb-4">
+                        <i data-lucide="bar-chart-3" class="w-12 h-12"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Detaylı İstatistikler</h3>
+                    <p class="text-gray-600">Link performansınızı takip edin. Tıklama sayıları ve daha fazlası.</p>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="p-6 border border-gray-200 rounded-xl hover:shadow-lg transition fade-in">
+                    <div class="text-indigo-600 mb-4">
+                        <i data-lucide="palette" class="w-12 h-12"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Özel Temalar</h3>
+                    <p class="text-gray-600">Bio sayfanızı 4 farklı tema ile kişiselleştirin.</p>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="p-6 border border-gray-200 rounded-xl hover:shadow-lg transition fade-in">
+                    <div class="text-indigo-600 mb-4">
+                        <i data-lucide="credit-card" class="w-12 h-12"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">vCard Desteği</h3>
+                    <p class="text-gray-600">Dijital kartvizitinizi paylaşın. Kişiler listesine kolay ekleme.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-20 px-4">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-16">Fiyatlandırma Planları</h2>
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- Free Plan -->
+                <div class="bg-white p-8 rounded-xl shadow-lg">
+                    <h3 class="text-2xl font-bold mb-2">Ücretsiz</h3>
+                    <div class="mb-6">
+                        <span class="text-4xl font-bold">₺0</span>
+                        <span class="text-gray-600">/ay</span>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center">
+                            <i data-lucide="check" class="w-5 h-5 mr-2 text-green-500"></i>
+                            <span>10 kısa link</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i data-lucide="check" class="w-5 h-5 mr-2 text-green-500"></i>
+                            <span>1 bio sayfası</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i data-lucide="check" class="w-5 h-5 mr-2 text-green-500"></i>
+                            <span>Temel temalar</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i data-lucide="check" class="w-5 h-5 mr-2 text-green-500"></i>
+                            <span>QR kod oluşturma</span>
+                        </li>
+                    </ul>
+                    <a href="register.html" class="block w-full bg-indigo-600 text-white text-center py-3 rounded-lg font-semibold hover:bg-indigo-700 transition">
+                        Hemen Başla
+                    </a>
+                </div>
+
+                <!-- Premium Plan -->
+                <div class="bg-indigo-600 text-white p-8 rounded-xl shadow-lg transform scale-105">
+                    <div class="flex items-center justify-center mb-4">
+                        <i data-lucide="crown" class="w-6 h-6 mr-2"></i>
+                        <span class="font-semibold">POPÜLER</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">Premium</h3>
+                    <div class="mb-6">
+                        <span class="text-4xl font-bold">₺49</span>
+                        <span class="text-indigo-200">/ay</span>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center">
+                            <i data-lucide="check" class="w-5 h-5 mr-2"></i>
+                            <span>Sınırsız kısa link</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i data-lucide="check" class="w-5 h-5 mr-2"></i>
+                            <span>Sınırsız bio sayfası</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i data-lucide="check" class="w-5 h-5 mr-2"></i>
+                            <span>Premium temalar</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i data-lucide="check" class="w-5 h-5 mr-2"></i>
+                            <span>Detaylı analitik</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i data-lucide="check" class="w-5 h-5 mr-2"></i>
+                            <span>Özel domain</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i data-lucide="check" class="w-5 h-5 mr-2"></i>
+                            <span>vCard desteği</span>
+                        </li>
+                    </ul>
+                    <a href="register.html" class="block w-full bg-white text-indigo-600 text-center py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
+                        Premium'a Geç
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 px-4 hero-gradient">
+        <div class="max-w-4xl mx-auto text-center text-white">
+            <h2 class="text-4xl font-bold mb-6">Linklerinizi Yönetmeye Başlayın</h2>
+            <p class="text-xl mb-8 opacity-90">
+                Ücretsiz hesap oluşturun ve hemen kullanmaya başlayın. Kredi kartı gerekmez.
+            </p>
+            <a href="register.html" class="inline-block bg-white text-indigo-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transform hover:scale-105 transition">
+                Ücretsiz Deneyin
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="flex items-center justify-center mb-6">
+                <i data-lucide="link-2" class="w-8 h-8 mr-2"></i>
+                <span class="text-2xl font-bold">Linkfy</span>
+            </div>
+            <p class="text-gray-400 mb-4">
+                Linklerinizi kısaltın, QR kod oluşturun ve kişisel bio sayfanızı oluşturun.
+            </p>
+            <p class="text-gray-500 text-sm">
+                © 2024 Linkfy. Tüm hakları saklıdır.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        // Language toggle (demo)
+        const langToggle = document.getElementById('langToggle');
+        langToggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            alert('Dil değiştirme özelliği yakında eklenecek!');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giriş Yap - Linkfy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen flex items-center justify-center px-4">
+    <!-- Notification -->
+    <div id="notification" class="fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 hidden">
+        <span id="notificationMessage"></span>
+    </div>
+
+    <div class="bg-white p-8 rounded-xl shadow-lg max-w-md w-full">
+        <!-- Logo -->
+        <div class="text-center mb-8">
+            <a href="/" class="inline-flex items-center space-x-2 mb-4">
+                <i data-lucide="link-2" class="w-10 h-10 text-indigo-600"></i>
+                <span class="text-3xl font-bold text-indigo-600">Linkfy</span>
+            </a>
+            <h2 class="text-2xl font-bold text-gray-900">Hesabınıza Giriş Yapın</h2>
+        </div>
+
+        <!-- Login Form -->
+        <form id="loginForm" class="space-y-6">
+            <div>
+                <label class="block text-sm font-medium mb-2">E-posta</label>
+                <input 
+                    type="email" 
+                    id="email"
+                    required
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                    placeholder="ornek@email.com"
+                >
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium mb-2">Şifre</label>
+                <input 
+                    type="password"
+                    id="password"
+                    required
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                    placeholder="••••••••"
+                >
+            </div>
+
+            <div class="flex items-center justify-between">
+                <label class="flex items-center">
+                    <input type="checkbox" class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                    <span class="ml-2 text-sm text-gray-600">Beni hatırla</span>
+                </label>
+                <a href="reset-password.html" class="text-sm text-indigo-600 hover:underline">Şifremi unuttum</a>
+            </div>
+
+            <button 
+                type="submit"
+                id="submitBtn"
+                class="w-full bg-indigo-600 text-white py-3 rounded-lg font-semibold hover:bg-indigo-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+                Giriş Yap
+            </button>
+        </form>
+
+        <!-- Divider -->
+        <div class="relative my-6">
+            <div class="absolute inset-0 flex items-center">
+                <div class="w-full border-t border-gray-300"></div>
+            </div>
+            <div class="relative flex justify-center text-sm">
+                <span class="px-2 bg-white text-gray-500">veya</span>
+            </div>
+        </div>
+
+        <!-- Sign Up Link -->
+        <p class="text-center text-gray-600">
+            Hesabınız yok mu? 
+            <a href="register.html" class="text-indigo-600 hover:underline font-semibold">
+                Kayıt Ol
+            </a>
+        </p>
+
+        <!-- Back to Home -->
+        <div class="mt-6 text-center">
+            <a href="/" class="text-sm text-gray-500 hover:text-gray-700">
+                ← Ana sayfaya dön
+            </a>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        const loginForm = document.getElementById('loginForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const notification = document.getElementById('notification');
+        const notificationMessage = document.getElementById('notificationMessage');
+
+        function showNotification(message, isError = false) {
+            notificationMessage.textContent = message;
+            notification.className = `fixed top-4 right-4 px-6 py-3 rounded-lg shadow-lg z-50 ${isError ? 'bg-red-500' : 'bg-green-500'} text-white`;
+            notification.classList.remove('hidden');
+            setTimeout(() => {
+                notification.classList.add('hidden');
+            }, 3000);
+        }
+
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            // Disable button
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Giriş yapılıyor...';
+
+            try {
+                const response = await fetch('/api/auth.php?action=login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    // Save token
+                    localStorage.setItem('token', data.data.token);
+                    localStorage.setItem('user', JSON.stringify(data.data.user));
+
+                    showNotification('Giriş başarılı! Yönlendiriliyorsunuz...');
+                    
+                    // Redirect to dashboard
+                    setTimeout(() => {
+                        window.location.href = '/dashboard';
+                    }, 1000);
+                } else {
+                    showNotification(data.message || 'Giriş başarısız', true);
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Giriş Yap';
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                showNotification('Bir hata oluştu. Lütfen tekrar deneyin.', true);
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Giriş Yap';
+            }
+        });
+
+        // Check if already logged in
+        if (localStorage.getItem('token')) {
+            window.location.href = '/dashboard';
+        }
+    </script>
+</body>
+</html>
